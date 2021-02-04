@@ -5,7 +5,7 @@
 #include <QGraphicsItem>
 #include <QGraphicsScene>
 #include <QPixmap>
-//#include <QGraphicsView>
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -26,10 +26,13 @@ private:
     QGraphicsScene *scene;
     QGraphicsRectItem *base_of;
     QGraphicsRectItem *base_def;
+    QGraphicsEllipseItem *Canion_of;
+    QGraphicsEllipseItem *Canion_def;
 
 
     //Funcion para el sistema de referencia
     int escala_Y(int y, int max);
+
 
 };
 #endif // MAINWINDOW_H
