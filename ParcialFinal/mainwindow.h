@@ -27,5 +27,9 @@ private:
     QGraphicsRectItem *base_of;
     QGraphicsRectItem *base_def;
 
+
+    //Funcion para el sistema de referencia
+    int escala_Y(int y, int max);
+
 };
 #endif // MAINWINDOW_H

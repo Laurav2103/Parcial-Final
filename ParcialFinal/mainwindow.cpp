@@ -15,14 +15,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->graphicsView->setScene(scene); //agrego la escena al graphicsview
 
     base_of= new QGraphicsRectItem;
-    base_of->setRect(0,0,10,20);
+    base_of->setRect(600,escala_Y(0,431)-100,40,100);
     scene->addItem(base_of);
     base_def= new QGraphicsRectItem;
-    base_def->setRect(0,50,20,20);
+    base_def->setRect(0,escala_Y(0,431)-100,40,100);
     scene->addItem(base_def);
 
 
 
+}
+int MainWindow::escala_Y(int y, int max)
+{
+    return  max-y;
 }
 
 MainWindow::~MainWindow()
