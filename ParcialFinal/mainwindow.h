@@ -42,10 +42,13 @@ private:
     QGraphicsRectItem *base_def;
     QGraphicsEllipseItem *Canion_of;
     QGraphicsEllipseItem *Canion_def;
+    QGraphicsEllipseItem *R_canion_of;
+    QGraphicsEllipseItem *R_canion_def;
+
 
     qreal Ho,Hd,D;
 
-    int maxy=431;
+    int maxy=481;
     bool flag;
     //Funcion para el sistema de referencia
     int escala_Y(int y, int max);
