@@ -79,13 +79,9 @@ void MainWindow::on_pushButton_clicked()
 }
 void MainWindow::on_pushButton_2_clicked()
 {
-    //Obtengo los valores a partir del spinbox de la interfaz
-    D= ui->distancia->value();
-    Ho=ui->altura_of->value();
-    Hd=ui->altura_def->value();
 
-    bOf=new cOfensivo(0.05*D,Ho,D,Hd);
-    bOf->setPos(10,50);
+    bOf=new cOfensivo(10,0.05*D,escala_Y(Ho,maxy),D,Hd);
+    bOf->setPos(10,escala_Y(Ho,maxy));
     scene->update();
     scene->addItem(bOf);
 

@@ -29,22 +29,23 @@ private:
     float Xd, Yd;
 
     // vectores donde se guardaran los angulos y velocidades cuando se generan disparos of
-    float ang[3]={};
-    float vel[3]={};
+    float ang[2]={};
+    float vel[2]={};
+    float a,b,c,w;
 
     float ecu_estudiante(float A,float B,float C);
     void imprimir(float angle, float V0, float x, float y, float t);
-     QGraphicsScene *scene;
-     QGraphicsEllipseItem *bulletOf;
-     int direccion;
-     float g=10;
-     float ra;
+    QGraphicsScene *scene;
+    QGraphicsEllipseItem *bulletOf;
+    int direccion;
+    float g=10;
+    float ra;
 
 public slots:
     void simulacion();
 
 public:
-    cOfensivo(float r,float Ho,float D,float Hd,QGraphicsItem *parent= nullptr);
+    cOfensivo(float xi,float r,float Ho,float D,float Hd,QGraphicsItem *parent= nullptr);
     QRectF boundingRect() const;
     QPixmap sprite;
     int posSprite;
@@ -52,7 +53,7 @@ public:
      float  vx,v=0;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void destructor(float Xd, float Yd, float angleD, float Vd);
-    void disparosOf(float Xd,float Yd);
+    void disparosOf();
 
     float getD() const;
     void setD(float value);
