@@ -21,8 +21,6 @@ MainWindow::MainWindow(QWidget *parent)
 
 
 
-
-
 }
 int MainWindow::escala_Y(int y, int max)
 {
@@ -79,11 +77,26 @@ void MainWindow::on_pushButton_clicked()
     flag=true;
 
 }
+void MainWindow::on_pushButton_2_clicked()
+{
+    //Obtengo los valores a partir del spinbox de la interfaz
+    D= ui->distancia->value();
+    Ho=ui->altura_of->value();
+    Hd=ui->altura_def->value();
+
+    bOf=new cOfensivo(0.05*D,Ho,D,Hd);
+    bOf->setPos(10,50);
+    scene->update();
+    scene->addItem(bOf);
+
+}
+
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 
 
 

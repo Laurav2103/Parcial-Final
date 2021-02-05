@@ -11,6 +11,7 @@
 #include <QLabel>
 #include <math.h>
 #include <QString>
+#include "cofensivo.h"
 using namespace std;
 
 
@@ -33,6 +34,8 @@ private slots:
     void on_pushButton_clicked();
 
 
+    void on_pushButton_2_clicked();
+
 private:
     
     Ui::MainWindow *ui;
@@ -46,10 +49,15 @@ private:
     QGraphicsEllipseItem *R_canion_def;
 
 
-    qreal Ho,Hd,D;
-
-    int maxy=481;
+    qreal Ho,Hd,D;//Variables que el usuario va a ingresar
+    int maxy=481; //Límite max en y
     bool flag;
+    //Definición de objeto de las clases cOfensivo y cDefensivo:
+    cOfensivo *bOf;
+
+
+
+
     //Funcion para el sistema de referencia
     int escala_Y(int y, int max);
 
