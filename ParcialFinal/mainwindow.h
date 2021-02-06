@@ -12,6 +12,7 @@
 #include <math.h>
 #include <QString>
 #include "cofensivo.h"
+#include "cdefensivo.h"
 using namespace std;
 
 
@@ -36,6 +37,8 @@ private slots:
 
     void on_pushButton_2_clicked();
 
+    void on_pushButton_3_clicked();
+
 private:
     
     Ui::MainWindow *ui;
@@ -54,6 +57,7 @@ private:
     bool flag;
     //Definición de objeto de las clases cOfensivo y cDefensivo:
     cOfensivo *bOf;
+    cDefensivo *bDef;
 
 
 

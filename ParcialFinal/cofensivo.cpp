@@ -45,7 +45,7 @@ void cOfensivo::disparosOf()
                 if(sqrt(pow((Xd-x),2)+pow((Yd-y),2))<=ra){
                     if(y<0) y=0;
                     ang[col]=angle;
-                    vel[col]=Vxin;
+                    vel[col]=V0;
                     imprimir(angle,Vxin,x,y,t);
 
                     col+=1;

@@ -86,13 +86,20 @@ void MainWindow::on_pushButton_2_clicked()
     scene->addItem(bOf);
 
 }
+void MainWindow::on_pushButton_3_clicked()
+{
+    bDef=new cDefensivo(10,0.025*D,Ho,D,escala_Y(Hd,maxy));
+    bDef->setPos(D,escala_Y(Hd,maxy));
+    scene->update();
+    scene->addItem(bDef);
+
+}
 
 
 MainWindow::~MainWindow()
 {
     delete ui;
 }
-
 
 
 

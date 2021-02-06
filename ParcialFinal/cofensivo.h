@@ -49,8 +49,8 @@ public:
     QRectF boundingRect() const;
     QPixmap sprite;
     int posSprite;
-     float  posy,posx;
-     float  vx,v=0;
+    float  posy,posx;
+    float  vx,v=0;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void destructor(float Xd, float Yd, float angleD, float Vd);
     void disparosOf();
