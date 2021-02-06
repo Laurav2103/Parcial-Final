@@ -10,10 +10,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
 
-   // timer=new QTimer;
-    //se inicialza el timer de la simulación
-//    connect(timer,SIGNAL(timeout()),this,SLOT(on_pushButton_clicked()));
-//    timer->start(100);
 
     scene = new QGraphicsScene;
     scene->setSceneRect(0,0,ui->graphicsView->width()-10,ui->graphicsView->height()-10);
@@ -88,10 +84,29 @@ void MainWindow::on_pushButton_2_clicked()
 }
 void MainWindow::on_pushButton_3_clicked()
 {
-    bDef=new cDefensivo(10,0.025*D,Ho,D,escala_Y(Hd,maxy));
+    bDef=new cDefensivo(10,0.025*D,Ho,D,escala_Y(Hd,maxy),2,0,0);
     bDef->setPos(D,escala_Y(Hd,maxy));
     scene->update();
     scene->addItem(bDef);
+
+}
+void MainWindow::on_pushButton_4_clicked()
+{
+
+    //disparo ofensivo
+    bOf=new cOfensivo(10,0.05*D,escala_Y(Ho,maxy),D,Hd);
+    bOf->setPos(10,escala_Y(Ho,maxy));
+    scene->update();
+    scene->addItem(bOf);
+    //Obtengo los valores a partir del spinbox de la interfaz
+    tetha= ui->angulo->value();
+    Vin=ui->velocidad->value();
+    //disparo defensivo
+    bDef=new cDefensivo(10,0.025*D,Ho,D,Hd,3,tetha,Vin);
+    bDef->setPos(D,escala_Y(Hd,maxy));
+    scene->update();
+    scene->addItem(bDef);
+
 
 }
 
@@ -100,6 +115,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+
 
 
 

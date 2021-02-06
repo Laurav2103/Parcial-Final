@@ -39,6 +39,8 @@ private slots:
 
     void on_pushButton_3_clicked();
 
+    void on_pushButton_4_clicked();
+
 private:
     
     Ui::MainWindow *ui;
@@ -52,7 +54,7 @@ private:
     QGraphicsEllipseItem *R_canion_def;
 
 
-    qreal Ho,Hd,D;//Variables que el usuario va a ingresar
+    qreal Ho,Hd,D,tetha,Vin;//Variables que el usuario va a ingresar
     int maxy=481; //Límite max en y
     bool flag;
     //Definición de objeto de las clases cOfensivo y cDefensivo:

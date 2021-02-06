@@ -1,23 +1,47 @@
 #include "cdefensivo.h"
 
-cDefensivo::cDefensivo(float xo,float r,float Ho,float D, float Hd,QGraphicsItem *parent): QGraphicsItem(parent)
+cDefensivo::cDefensivo(float xo,float r,float Ho,float D, float Hd,int p,float an,float v1,QGraphicsItem *parent): QGraphicsItem(parent)
 {
+
+    ra=r;
+    sprite=QPixmap(":/dibujo.png");
+    sprite1=sprite.scaledToHeight(2*ra);
+    sprite2=sprite.scaledToWidth(2*ra);
+    //recibo los datos ingresados y los guardo
     direccion=-1;
     posy=Hd;
     posx=D;
     Xo=xo;
     Yo=Ho;
-    ra=r;
     Xd=D;
     Yd=Hd;
-    disparosDef();
-    vx=vel[1]; //velocidad inicial en x
-    w=ang[1]*(pi/180); //grados a rad
-    w=-w;
-    v=vx*tan(w); //vy
+    punto=p;
+    angle=an;
+    V2in=v1;
+   //if para generar disparos defensivos dependiendo del boton pulsado
+    if(punto==2){
+        disparosDef();
+        vx=vel[1]; //velocidad inicial en x
+        w=ang[1]*(pi/180); //grados a rad
+        w=-w;
+        v=vx*tan(w); //vy
+    }
+    else if(punto==3){
+        disparoDef2();
+        vx=veld[2]; //velocidad inicial en x
+        w=angd[2];
+        w=-w;
+        v=vx*tan(w); //vy
+
+    }
+
+
+
     QTimer *timer = new QTimer(this);
     connect(timer,SIGNAL(timeout()),this,SLOT(simulacion()));
     timer->start(int(1000*T));
+
+
 
 }
 void cDefensivo::disparosDef()
@@ -55,7 +79,7 @@ void cDefensivo::disparosDef()
 
 }
 
-void cDefensivo::disparoDef2(float Yo, float Xd, float Yd, int angle, int V2in)
+void cDefensivo::disparoDef2()
 {
 
     float x=0, y=0,t2,t=0,thetaD,Vd,vely,velx;
@@ -72,6 +96,8 @@ void cDefensivo::disparoDef2(float Yo, float Xd, float Yd, int angle, int V2in)
             Vd=((Xd-velx*t))/((t-2)*cos(thetaD));
             x=velx*t;
             y=Yo +vely*t-(0.5*G*t*t);
+            angd[col]=thetaD;
+            veld[col]=Vd;
             imprimir(thetaD*180/pi,Vd,x,y,t);
             }
     }
@@ -143,6 +169,10 @@ void cDefensivo::simulacion()
        v=v+g*t;
        posx=posx+vx*t*direccion;
        setPos(posx,posy);
+       cont++;
+          if(cont%3==0){
+              scene()->addEllipse(posx,posy,2*ra,2*ra);
+          }
 }
 
 
@@ -174,20 +204,14 @@ void cDefensivo::setD(float value)
 }
 QRectF cDefensivo::boundingRect() const {
 
-    return QRectF(-2,-2,2,2);
+    return QRectF(-2,-2,2*ra,2*ra);
 }
 
 //Se dibuja el objeto en la escena a partir del sprite
 void cDefensivo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-   // painter->drawPixmap(0,0, sprite, posSprite, 0,20, 20);
-
+    painter->drawPixmap(0,0, sprite2, posSprite, 0,2*ra, 2*ra);
     setTransformOriginPoint(boundingRect().center());
-    painter->setBrush(Qt::red);
-    painter->drawEllipse(boundingRect().center(),ra,ra);
-    painter->setBrush(Qt::black);
-    painter->drawEllipse(boundingRect());
-
     Q_UNUSED(widget)
     Q_UNUSED(option)
 }

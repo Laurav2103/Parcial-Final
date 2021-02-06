@@ -2,6 +2,14 @@
 
 cOfensivo::cOfensivo(float xi,float r,float Ho,float D, float Hd,QGraphicsItem *parent): QGraphicsItem(parent)
 {
+
+    //Agrego la imagen
+    setFlag(ItemClipsToShape);
+    ra=r; //radio de destruccion
+    sprite=QPixmap(":/dibujo.png");
+    sprite1=sprite.scaledToHeight(2*ra);
+    sprite2=sprite.scaledToWidth(2*ra);
+    //recibo los datos ingresados
     posy=Ho;
     posx=xi;
     direccion=1;
@@ -9,8 +17,9 @@ cOfensivo::cOfensivo(float xi,float r,float Ho,float D, float Hd,QGraphicsItem *
     d=D;
     Xd=D;
     Yd=Hd;
-    ra=r; //radio de destruccion
+    //llamo la funcion para generar disparos ofensivos
     disparosOf();
+    //Realizo operaciones para ingresar valores al slot simulacion
     vx=vel[0]; //velocidad inicial en x
     w=ang[0]*(pi/180); //grados a rad
     w=-w;
@@ -46,7 +55,7 @@ void cOfensivo::disparosOf()
                     if(y<0) y=0;
                     ang[col]=angle;
                     vel[col]=V0;
-                    imprimir(angle,Vxin,x,y,t);
+                    imprimir(angle,V0,x,y,t);
 
                     col+=1;
                     V0+=30;
@@ -61,36 +70,6 @@ void cOfensivo::disparosOf()
 
 }
 
-//void cOfensivo::destructor(float Xd, float Yd, float angleD, float Vd)
-//{
-//    int i=0;
-//    float K1,K2,M1,M2,R,A,B,C,t1,t,alphaO,Vo,x,y,velx,vely;
-//    vely=Vd*sin((angleD)*pi/180);
-//    velx=Vd*cos((angleD)*pi/180);
-//   // constantes generadas para simplicar la implementacion de las ecuaciones;
-//    K1=Xd+2*velx;
-//    M1=velx+vel[i]*cos(ang[i]*pi/180);
-//    K2=Yd-Yo-2*G-2*vely;
-//    M2=vely+2*G-vel[i]*sin(ang[i]*pi/180);
-//    R=0.025*Xd;
-//    A=M1*M1+M2*M2;
-//    B=2*(K2*M2-K1*M1);
-//    C=K1*K1+K2*K2-R*R;
-//    t1=ecu_estudiante(A,B,C);//Para calcular el momento en el cual la bala defensiva destruye la ofensiva
-//    if(t1>=3){ //3 segundos de retraso en total
-//        for(int col=1;col<4;col++){
-//            t=3+((t1-3)/(4.0))*col;
-//            alphaO=atan((Yd-Yo+vely*(t-2)+G*0.5*(5-2*t))/(Xd-velx*(t-2)));
-//            Vo=(Xd-velx*(t-2))/((t-3)*cos(alphaO));
-//            x=Vo*cos(alphaO)*(t-3);
-//            y=Yo +Vo*sin(alphaO)*(t-3)-(0.5*G*(t-3)*(t-3));
-//            imprimir(alphaO*180/pi,Vo,x,y,t);
-//         }
-//    }
-//    else cout<<"No es posible defender la bala ofensiva"<<endl;
-
-
-//}
 void cOfensivo::imprimir(float angle, float V0, float x, float y, float t)
 {
 
@@ -113,6 +92,10 @@ void cOfensivo::simulacion()
        v=v+g*t;
        posx=posx+vx*t*direccion;
        setPos(posx,posy);
+       cont++;
+          if(cont%3==0){
+              scene()->addEllipse(posx,posy,2*ra,2*ra);
+          }
 }
 
 
@@ -148,20 +131,15 @@ void  cOfensivo::setD0(float value)
 }
 QRectF cOfensivo::boundingRect() const {
 
-    return QRectF(-2,-2,2,2);
+    return QRectF(-2,-2,2*ra,2*ra);
 }
 
 //Se dibuja el objeto en la escena a partir del sprite
 void cOfensivo::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget)
 {
-   // painter->drawPixmap(0,0, sprite, posSprite, 0,20, 20);
 
+    painter->drawPixmap(0,0, sprite2, posSprite, 0,2*ra, 2*ra);
     setTransformOriginPoint(boundingRect().center());
-    painter->setBrush(Qt::red);
-    painter->drawEllipse(boundingRect().center(),ra,ra);
-    painter->setBrush(Qt::black);
-    painter->drawEllipse(boundingRect());
-
     Q_UNUSED(widget)
     Q_UNUSED(option)
 }

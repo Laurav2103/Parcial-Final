@@ -2,5 +2,6 @@
     <qresource prefix="/">
         <file>balaa.png</file>
         <file>balaa (1).png</file>
+        <file>dibujo.png</file>
     </qresource>
 </RCC>

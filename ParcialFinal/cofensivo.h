@@ -35,7 +35,7 @@ private:
 
     float ecu_estudiante(float A,float B,float C);
     void imprimir(float angle, float V0, float x, float y, float t);
-    QGraphicsScene *scene;
+  //  QGraphicsScene *scene;
     QGraphicsEllipseItem *bulletOf;
     int direccion;
     float g=10;
@@ -47,10 +47,11 @@ public slots:
 public:
     cOfensivo(float xi,float r,float Ho,float D,float Hd,QGraphicsItem *parent= nullptr);
     QRectF boundingRect() const;
-    QPixmap sprite;
+    QPixmap sprite,sprite1,sprite2;
     int posSprite;
     float  posy,posx;
     float  vx,v=0;
+    int cont;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWidget *widget);
     void destructor(float Xd, float Yd, float angleD, float Vd);
     void disparosOf();
